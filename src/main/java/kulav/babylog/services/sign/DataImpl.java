@@ -9,5 +9,5 @@ public class DataImpl implements Data{
 
 	private String ts;
 	
-	private String userId;
+	private long userId;
 }

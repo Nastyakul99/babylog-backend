@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kulav.babylog.aspects.authentication.Signed;
-import kulav.babylog.models.request.SignedRequestImpl;
+import kulav.babylog.models.sign.request.SignedRequestImpl;
 import kulav.babylog.services.sign.SignGenImpl;
 
 
@@ -22,6 +22,11 @@ public class TController {
 	public Boolean get(SignedRequestImpl data) {
 		String str = signGenImpl.generate(data);
 		return data.getSign().equals(str);
+	}
+	
+	@GetMapping("/test2")
+	public String get2() {
+		return "hello";
 	}
 	//ZjYxNDM2YmU0MWEwMTkwZmQwZGYyYWYxOTc2ZDJmYTM2ZTk4MjA4OTYwNmNhNTk0MTY0NWFjY2E4M2Q0ZjYwYg
 	/**

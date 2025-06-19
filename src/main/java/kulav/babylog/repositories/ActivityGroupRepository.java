@@ -2,10 +2,9 @@ package kulav.babylog.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import kulav.babylog.models.ActivityGroup;
 
-import kulav.babylog.models.Family;
-
-@RepositoryRestResource(exported = false)
-public interface FamilyRepository extends CrudRepository<Family,Long> {
+@RepositoryRestResource
+public interface ActivityGroupRepository extends CrudRepository<ActivityGroup,Long> {
 
 }

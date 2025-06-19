@@ -14,28 +14,20 @@ import lombok.ToString;
 @Entity
 @EqualsAndHashCode(of = "id")
 @ToString
-public class Person {
-
+public class Baby {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Getter
 	private long id;
 	
 	@Getter
 	@Setter
-	private long vkId;
+	private String name;
 	
 	@Getter
 	@Setter
 	@ManyToOne
 	@JoinColumn(name="family_id")
 	private Family family;
-	
-	public Person() {
-		
-	}
-	
-	public Person(long vkId) {
-		this.vkId = vkId;
-	}
+
 }

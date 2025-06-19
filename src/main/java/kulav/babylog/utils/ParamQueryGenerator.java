@@ -30,6 +30,6 @@ public class ParamQueryGenerator {
 	}
 	
 	private static String urlEncode(String str) {
-		return URLEncoder.encode(str, StandardCharsets.UTF_8);
+		return URLEncoder.encode(str == null ? "" : str, StandardCharsets.UTF_8);
 	}
 }

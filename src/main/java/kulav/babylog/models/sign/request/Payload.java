@@ -1,4 +1,4 @@
-package kulav.babylog.models.request;
+package kulav.babylog.models.sign.request;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

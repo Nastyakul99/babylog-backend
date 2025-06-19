@@ -1,4 +1,4 @@
-package kulav.babylog.models.request;
+package kulav.babylog.models.sign.request;
 
 import kulav.babylog.services.sign.Data;
 
@@ -8,7 +8,8 @@ public interface SignedRequest {
 	
 	public String getTs();
 	
-	public String getUserId();
+	//vkId
+	public long getUserId();
 	
 	public Payload getPayload();
 	

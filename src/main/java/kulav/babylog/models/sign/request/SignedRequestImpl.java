@@ -1,4 +1,4 @@
-package kulav.babylog.models.request;
+package kulav.babylog.models.sign.request;
 
 import kulav.babylog.services.sign.DataImpl;
 import lombok.Data;
@@ -16,7 +16,7 @@ public class SignedRequestImpl implements SignedRequest {
 
 	private String ts;
 	
-	private String userId;
+	private long userId;
 	
 	public Payload getPayload() {
 		return new Payload(){

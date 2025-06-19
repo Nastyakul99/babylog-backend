@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
 
-import kulav.babylog.models.request.SignedRequest;
+import kulav.babylog.models.sign.request.SignedRequest;
 import kulav.babylog.utils.ParamQueryGenerator;
 
 @Component
@@ -40,7 +40,7 @@ public class SignGenImpl implements SignGen {
 	private Map<String, String> createMap(Data data) {
 		Map<String, String> map = new TreeMap<String, String>();
 		map.put("app_id", data.getAppId());
-		map.put("user_id", data.getUserId());
+		map.put("user_id", String.valueOf(data.getUserId()));
 		map.put("request_id", data.getRequestId());
 		map.put("ts", data.getTs());
 		return map;

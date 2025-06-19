@@ -9,7 +9,7 @@ public interface Data {
 
 	public String getTs();
 	
-	public String getUserId();
+	public long getUserId();
 	
 	public void setAppId(String appId);
 	
@@ -17,5 +17,5 @@ public interface Data {
 
 	public void setTs(String ts);
 	
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 }

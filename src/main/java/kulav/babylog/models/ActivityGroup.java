@@ -3,8 +3,6 @@ package kulav.babylog.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +17,8 @@ import lombok.ToString;
 @Entity
 @EqualsAndHashCode(of = "id")
 @ToString
-public class Family {
-
+public class ActivityGroup {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -28,19 +26,26 @@ public class Family {
 	@Getter
 	@Setter
 	private String name;
-
-	@JsonIgnore
+	
 	@Getter
 	@Setter
-	@OneToMany(mappedBy="family", cascade = CascadeType.ALL)
-	private List<Person> persons = new ArrayList<>();
+	private String printName;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="family", cascade = CascadeType.ALL)
-	private List<Baby> babies = new ArrayList<>();
+	@Getter
+	@Setter
+	private String img;
 	
-	public void addPerson(Person p) {
-		p.setFamily(this);
-		persons.add(p);
+	@OneToMany(mappedBy="group", cascade = CascadeType.ALL)
+	private List<Activity> activities = new ArrayList<>();
+	
+	public ActivityGroup() {
+		
 	}
+	
+	public ActivityGroup(String name, String printName, String img) {
+		this.name = name;
+		this.printName = printName;
+		this.img = img;
+	}
+
 }
