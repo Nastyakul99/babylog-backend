@@ -19,6 +19,8 @@ import lombok.ToString;
 @ToString
 public class ActivityGroup {
 	
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

@@ -9,7 +9,7 @@ import kulav.babylog.repositories.PersonRepository;
 @Service
 public class PersonService {
 	
-	private PersonRepository personRepository;
+	private final PersonRepository personRepository;
 	
 	public PersonService(PersonRepository personRepository) {
 		this.personRepository = personRepository;

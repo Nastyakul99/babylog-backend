@@ -16,6 +16,8 @@ import lombok.ToString;
 @ToString
 public class Activity {
 	
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -37,5 +39,16 @@ public class Activity {
 	@ManyToOne
 	@JoinColumn(name="group_id")
 	private ActivityGroup group;
+	
+	public Activity() {
+		
+	}
+	
+	public Activity(String name, String printName, String img, ActivityGroup group) {
+		this.name = name;
+		this.printName = printName;
+		this.img = img;
+		this.group = group;
+	}
 
 }

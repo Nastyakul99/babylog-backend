@@ -16,7 +16,7 @@ import kulav.babylog.services.FamilyService;
 @RequestMapping({"/families"})
 public class FamilyController {
 	
-	private FamilyService familyService;
+	private final FamilyService familyService;
 	
 	public FamilyController(FamilyService familyService) {
 		this.familyService = familyService;

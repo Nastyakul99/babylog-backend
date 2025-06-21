@@ -18,16 +18,17 @@ import kulav.babylog.repositories.FamilyRepository;
 @Service
 public class FamilyService {
 	
-	private FamilyRepository familyRepository;
+	private final FamilyRepository familyRepository;
 	
-	private PersonService personService;
+	private final PersonService personService;
 	
 	@Autowired
-	private MessageSource messageSource;
+	private final MessageSource messageSource;
 	
-	public FamilyService(FamilyRepository familyRepository, PersonService personService) {
+	public FamilyService(FamilyRepository familyRepository, PersonService personService, MessageSource messageSource) {
 		this.familyRepository = familyRepository;
 		this.personService = personService;
+		this.messageSource = messageSource;
 	}
 
 	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
