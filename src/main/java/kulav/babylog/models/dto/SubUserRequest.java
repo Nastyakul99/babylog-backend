@@ -7,12 +7,12 @@ import kulav.babylog.services.sign.DataImpl;
 import lombok.Data;
 
 @Data
-public class AddToFamilyRequest implements SignedRequest {
+public class SubUserRequest implements SignedRequest {
 	
 	private String sign;
 	
 	@PartOfPayload
-	private long newMemberId;
+	private long subUserId;
 
 	private String ts;
 	
@@ -22,7 +22,7 @@ public class AddToFamilyRequest implements SignedRequest {
 		return new Payload(){
 			@Override
 			public String genParamQuery() {
-				return genParamQuery(AddToFamilyRequest.this);
+				return genParamQuery(SubUserRequest.this);
 			}};
 	}
 
