@@ -29,8 +29,6 @@ public class SignGenImpl implements SignGen {
 		return generate(data);
 	}
 	
-
-	
 	// Формируем строку для вычисления подписи
 	private String genParamsQuery(Data data) {
 		Map<String, String> map  = createMap(data);
