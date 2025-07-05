@@ -43,4 +43,9 @@ public class Family {
 		p.setFamily(this);
 		persons.add(p);
 	}
+	
+	public void deletePerson(Person p) {
+		p.setFamily(null);
+		persons.remove(p);
+	}
 }

@@ -38,4 +38,13 @@ public class FamilyController {
 				.map(PersonDTO::create)
 				.toList();
 	}
+	
+	@Signed
+	@PostMapping()
+	public List<PersonDTO> removeFromFamily(@RequestBody SubUserRequest subUserRequest) {
+		return familyService.removeFromFamily(subUserRequest.getSubUserId())
+				.stream()
+				.map(PersonDTO::create)
+				.toList();
+	}
 }

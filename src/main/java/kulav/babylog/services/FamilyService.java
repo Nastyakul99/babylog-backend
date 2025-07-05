@@ -51,6 +51,13 @@ public class FamilyService {
 		.toList();
 	}
 	
+	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+	public List<Person> removeFromFamily(long deletedVkId) {
+		personService.findByVkId(deletedVkId)
+		.ifPresent(p -> p.removeFromFamily());
+		return findByVKId(deletedVkId);
+	}
+	
 	public Family create() {
 		Family family = new Family();
 		return familyRepository.save(family);
