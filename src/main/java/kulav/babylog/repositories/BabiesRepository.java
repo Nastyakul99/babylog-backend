@@ -6,5 +6,5 @@ import kulav.babylog.models.Baby;
 
 @RepositoryRestResource
 public interface BabiesRepository extends CrudRepository<Baby,Long> {
-
+	
 }

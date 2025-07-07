@@ -17,7 +17,7 @@ public class PersonService {
 
 
     public PersonDTO createDTO(long vkId) {
-        Optional<Person> opt = findByVkId(vkId);
+        Optional<Person> opt = getByVkId(vkId);
         if (opt.isPresent()) return PersonDTO.create(opt.get());
         Person newPerson = new Person(vkId);
         newPerson = personRepository.save(newPerson);
@@ -26,18 +26,18 @@ public class PersonService {
     
 	//если пользователя нет, то создает его, иначе возвращает существующего
     public Person create(long vkId) {
-        Optional<Person> opt = findByVkId(vkId);
+        Optional<Person> opt = getByVkId(vkId);
         if (opt.isPresent()) return opt.get();
         Person newPerson = new Person(vkId);
         newPerson = personRepository.save(newPerson);
 		return newPerson;
     }
     
-    public Optional<Person> findByVkId(long vkId) {
+    public Optional<Person> getByVkId(long vkId) {
     	return personRepository.findByVkId(vkId);
     }
     
-    public Iterable<Person> findAll() {
+    public Iterable<Person> get() {
     	return personRepository.findAll();
     }
 }

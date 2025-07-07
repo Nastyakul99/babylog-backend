@@ -35,6 +35,7 @@ public class Family {
 	@OneToMany(mappedBy="family", cascade = CascadeType.ALL)
 	private List<Person> persons = new ArrayList<>();
 	
+	@Getter
 	@JsonIgnore
 	@OneToMany(mappedBy="family", cascade = CascadeType.ALL)
 	private List<Baby> babies = new ArrayList<>();

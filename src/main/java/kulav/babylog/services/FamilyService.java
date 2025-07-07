@@ -53,9 +53,9 @@ public class FamilyService {
 	
 	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
 	public List<Person> removeFromFamily(long deletedVkId) {
-		personService.findByVkId(deletedVkId)
+		personService.getByVkId(deletedVkId)
 		.ifPresent(p -> p.removeFromFamily());
-		return findByVKId(deletedVkId);
+		return getByVKId(deletedVkId);
 	}
 	
 	public Family create() {
@@ -63,8 +63,8 @@ public class FamilyService {
 		return familyRepository.save(family);
 	}
 	
-	public List<Person> findByVKId(long vkId) {
-		Optional<Person> opt = personService.findByVkId(vkId);
+	public List<Person> getByVKId(long vkId) {
+		Optional<Person> opt = personService.getByVkId(vkId);
 		if (opt.isPresent()) {
 			Person person = opt.get();
 			Family family = person.getFamily();

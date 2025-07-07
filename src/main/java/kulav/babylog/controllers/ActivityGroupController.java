@@ -5,6 +5,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import kulav.babylog.models.ActivityGroup;
 import kulav.babylog.models.dto.ActivityGroupDTO;
 import kulav.babylog.services.ActivityGroupService;
 
@@ -23,5 +24,13 @@ public class ActivityGroupController {
 		return StreamSupport.stream(activityGroupService.get().spliterator(), false)
 				.map(ActivityGroupDTO::create)
 				.toList();
+	}
+	
+	//TODO: изменить 
+	@GetMapping()
+	public ActivityGroupDTO getById(long id) {
+		ActivityGroup group = activityGroupService.getById(id)
+				.orElseThrow(() ->  new IllegalArgumentException("There is no group with id = " + id));
+		return ActivityGroupDTO.create(group);
 	}
 }

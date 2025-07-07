@@ -30,7 +30,7 @@ public class PersonController {
 	
 	//TODO: для теста
 	@GetMapping()
-	public Iterable<Person> findAll() {
-		return personService.findAll();
+	public Iterable<Person> get() {
+		return personService.get();
 	}
 }
