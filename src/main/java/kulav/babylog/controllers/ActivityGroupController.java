@@ -3,6 +3,7 @@ package kulav.babylog.controllers;
 import java.util.List;
 import java.util.stream.StreamSupport;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import kulav.babylog.models.ActivityGroup;
@@ -27,8 +28,8 @@ public class ActivityGroupController {
 	}
 	
 	//TODO: изменить 
-	@GetMapping()
-	public ActivityGroupDTO getById(long id) {
+	@GetMapping("/{id}")
+	public ActivityGroupDTO getById(@PathVariable long id) {
 		ActivityGroup group = activityGroupService.getById(id)
 				.orElseThrow(() ->  new IllegalArgumentException("There is no group with id = " + id));
 		return ActivityGroupDTO.create(group);

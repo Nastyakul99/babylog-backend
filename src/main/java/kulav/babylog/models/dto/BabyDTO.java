@@ -1,8 +1,10 @@
 package kulav.babylog.models.dto;
 
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import kulav.babylog.models.Baby;
 import kulav.babylog.models.Gender;
+import kulav.babylog.utils.StringMapper;
 import lombok.Data;
 
 @Data
@@ -12,6 +14,7 @@ public class BabyDTO {
 	
 	private String name;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 
 	private Gender gender;
@@ -23,5 +26,9 @@ public class BabyDTO {
 		dto.birthDate = b.getBirthDate();
 		dto.gender = b.getGender();
 		return dto;
+	}
+	
+	public String toString() {
+		return StringMapper.map(this);
 	}
 }

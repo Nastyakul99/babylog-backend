@@ -52,10 +52,10 @@ public class FamilyService {
 	}
 	
 	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
-	public List<Person> removeFromFamily(long deletedVkId) {
+	public List<Person> removeFromFamily(long userVkId, long deletedVkId) {
 		personService.getByVkId(deletedVkId)
 		.ifPresent(p -> p.removeFromFamily());
-		return getByVKId(deletedVkId);
+		return getByVKId(userVkId);
 	}
 	
 	public Family create() {

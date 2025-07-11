@@ -1,6 +1,8 @@
 package kulav.babylog.controllers;
 
 import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,9 +42,9 @@ public class FamilyController {
 	}
 	
 	@Signed
-	@PostMapping()
+	@DeleteMapping()
 	public List<PersonDTO> removeFromFamily(@RequestBody SubIdRequest subUserRequest) {
-		return familyService.removeFromFamily(subUserRequest.getSubId())
+		return familyService.removeFromFamily(subUserRequest.getUserId() ,subUserRequest.getSubId())
 				.stream()
 				.map(PersonDTO::create)
 				.toList();
