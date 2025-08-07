@@ -8,7 +8,7 @@ import kulav.babylog.utils.StringMapper;
 import lombok.Data;
 
 @Data
-public class BabyDTO {
+public class BabyDTO implements DTO {
 
 	private long id;
 	

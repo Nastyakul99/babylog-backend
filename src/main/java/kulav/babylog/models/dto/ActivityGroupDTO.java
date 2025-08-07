@@ -4,7 +4,7 @@ import kulav.babylog.models.ActivityGroup;
 import lombok.Data;
 
 @Data
-public class ActivityGroupDTO {
+public class ActivityGroupDTO implements DTO {
 	
 	private long id;
 

@@ -1,8 +1,9 @@
 package kulav.babylog.models.sign.request;
 
+import kulav.babylog.models.dto.DTO;
 import kulav.babylog.services.sign.Data;
 
-public interface SignedRequest {
+public interface SignedRequest extends DTO {
 
 	public String getSign();
 	
