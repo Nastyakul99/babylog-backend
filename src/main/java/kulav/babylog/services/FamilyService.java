@@ -33,12 +33,7 @@ public class FamilyService {
 
 	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
 	public List<Person> addToFamily(long vkId, long newMemberVkId) {
-		Person person = personService.create(vkId);
-		Family family = person.getFamily();
-		if (family == null) {
-			family = create();
-		}
-		family.addPerson(person);
+		Family family = create(vkId);
 		Person newMember = personService.create(newMemberVkId);
 		family.addPerson(newMember);
 		familyRepository.save(family);
@@ -56,6 +51,17 @@ public class FamilyService {
 		personService.getByVkId(deletedVkId)
 		.ifPresent(p -> p.removeFromFamily());
 		return getByVKId(userVkId);
+	}
+	
+	public Family create(long vkId) {
+		Person person = personService.create(vkId);
+		Family family = person.getFamily();
+		if (family == null) {
+			family = create();
+			family.addPerson(person);
+			familyRepository.save(family);
+		}
+		return family;
 	}
 	
 	public Family create() {

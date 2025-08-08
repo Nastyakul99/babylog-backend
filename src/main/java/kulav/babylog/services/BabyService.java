@@ -15,14 +15,19 @@ public class BabyService {
 	
 	private final BabiesRepository babiesRepository;
 	private final PersonService personService;
+	private final FamilyService familyService;
 	
-	public BabyService(BabiesRepository babiesRepository, PersonService personService) {
+	public BabyService(BabiesRepository babiesRepository,
+			PersonService personService, FamilyService familyService) {
 		this.babiesRepository = babiesRepository;
 		this.personService = personService;
+		this.familyService = familyService;
 	}
 
-    public Baby create(BabyDTO dto) {
+    public Baby create(BabyDTO dto, long vkId) {
     	Baby b = new Baby();
+    	Family family = familyService.create(vkId);
+    	b.setFamily(family);
     	return update(b, dto);
     }
     

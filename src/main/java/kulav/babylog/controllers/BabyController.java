@@ -30,7 +30,7 @@ public class BabyController {
 	@Signed
 	@PostMapping()
 	public BabyDTO create(@RequestBody BabySignedRequest request) {
-		return map(babyService.create(request.getBaby()));
+		return map(babyService.create(request.getBaby(), request.getUserId()));
 	}
 	
 	@Signed
