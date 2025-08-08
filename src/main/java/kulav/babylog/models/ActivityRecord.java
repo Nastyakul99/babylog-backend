@@ -1,5 +1,7 @@
 package kulav.babylog.models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,5 +32,9 @@ public class ActivityRecord {
 	@ManyToOne
 	@JoinColumn(name="activity_id")
 	private Activity activity;
+	
+	@Getter
+	@Setter
+	private LocalDateTime startTime;
 
 }

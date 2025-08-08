@@ -69,6 +69,10 @@
     		<artifactId>guava</artifactId>
     		<version>33.4.8-jre</version>
 		</dependency>
+		<dependency>
+    		<groupId>org.postgresql</groupId>
+    		<artifactId>postgresql</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
