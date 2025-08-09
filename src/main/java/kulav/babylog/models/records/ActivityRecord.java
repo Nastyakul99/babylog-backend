@@ -1,4 +1,4 @@
-package kulav.babylog.models;
+package kulav.babylog.models.records;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +10,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import kulav.babylog.models.Activity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

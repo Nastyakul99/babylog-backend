@@ -2,5 +2,9 @@ package kulav.babylog.models;
 
 public enum TypeActivityRecord {
 
-	TEST;
+	BASE_RECORD,
+	
+	TIME_RANGE,
+	
+	TEXT_NOTE;
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import kulav.babylog.models.records.ActivityRecord;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
