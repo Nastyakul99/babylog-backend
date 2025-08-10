@@ -3,7 +3,7 @@ package kulav.babylog.services;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import kulav.babylog.models.Activity;
-import kulav.babylog.models.dto.CreateActivityRecordRequest;
+import kulav.babylog.models.dto.records.ActivityRecordDTO;
 import kulav.babylog.models.records.ActivityRecord;
 import kulav.babylog.repositories.ActivityRecordRepository;
 import kulav.babylog.repositories.ActivityRepository;
@@ -25,8 +25,8 @@ public class ActivityRecordService {
     }
 
     @Transactional
-    public ActivityRecord create(CreateActivityRecordRequest request) {
-        Activity activity = activityRepository.findById(request.activityId())
+    public ActivityRecord create(ActivityRecordDTO request) {
+        Activity activity = activityRepository.findById(request.getActivityId())
                 .orElseThrow(() -> new IllegalArgumentException("Activity not found"));
 
         ActivityRecord record = factory.createRecord(activity, request);
