@@ -52,7 +52,7 @@ public class BabyService {
     	if (opt.isPresent()) {
     		Person p = opt.get();
     		Family f = p.getFamily();
-    		return f.getBabies();
+    		return f != null ? f.getBabies() : List.of();
     	}
     	throw new IllegalArgumentException("There is no person with vkId = " + vkId);
     }
