@@ -1,7 +1,6 @@
 package kulav.babylog.aspects.authentication;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.aspectj.lang.JoinPoint;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
+import kulav.babylog.exceptions.AuthenticationException;
 import kulav.babylog.models.sign.request.SignedRequest;
 import kulav.babylog.services.sign.SignGenImpl;
 
@@ -36,17 +36,14 @@ public class AuthenticationAspect {
         .filter(this::isSignedRequest)
         .collect(Collectors.toList());
         
-        if (requests.isEmpty()) throw new IllegalArgumentException(
-        		messageSource.getMessage("error.authentication.signedrequest.missing", new Object[]{}, Locale.getDefault()));
-        if (requests.size() > 1) throw new IllegalArgumentException(
-        		messageSource.getMessage("error.authentication.signedrequest.not.alone", new Object[]{}, Locale.getDefault()));      
+        if (requests.isEmpty()) throw new AuthenticationException(messageSource, "error.authentication.signedrequest.missing");
+        if (requests.size() > 1) throw new AuthenticationException(messageSource, "error.authentication.signedrequest.not.alone");      
        
         SignedRequest request = (SignedRequest) (requests.get(0));
         
         String sign = signGenImpl.generate(request.createData(appId));
         
-        if (!sign.equals(request.getSign())) throw new IllegalArgumentException(
-        		messageSource.getMessage("error.authentication.signature.not.valid", new Object[]{}, Locale.getDefault()));
+        if (!sign.equals(request.getSign())) throw new AuthenticationException(messageSource, "error.authentication.signature.not.valid");
 
     }
     
