@@ -11,6 +11,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import kulav.babylog.models.Activity;
+import kulav.babylog.models.dto.records.ActivityRecordDTO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,10 +33,15 @@ public class ActivityRecord {
 	@Setter
 	@ManyToOne
 	@JoinColumn(name="activity_id")
-	private Activity activity;
+	protected Activity activity;
 	
 	@Getter
 	@Setter
-	private LocalDateTime startTime;
-
+	protected LocalDateTime startTime;
+	
+	public ActivityRecord update(ActivityRecordDTO dto, Activity activity) {
+		this.startTime = dto.getStartTime();
+		this.activity = activity;
+		return this;
+	}
 }
