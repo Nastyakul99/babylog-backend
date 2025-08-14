@@ -12,11 +12,9 @@ public class TimeRangeRecordDTO extends ActivityRecordDTO {
 
 	private LocalDateTime endTime;
 	
-	public static TimeRangeRecordDTO create(TimeRangeRecord ar) {
-		TimeRangeRecordDTO dto = new TimeRangeRecordDTO();
-		dto.activityId = ar.getActivity() != null ? ar.getActivity().getId() : null;
-		dto.startTime = ar.getStartTime();
-		dto.endTime = ar.getEndTime();
-		return dto;
-	}
+    public static TimeRangeRecordDTO create(TimeRangeRecord ar) {
+        TimeRangeRecordDTO dto = baseCreate(ar, new TimeRangeRecordDTO());
+        dto.endTime = ar.getEndTime();
+        return dto;
+    }
 }

@@ -10,11 +10,9 @@ public class TextNoteRecordDTO extends ActivityRecordDTO {
 
 	private String comment;
 	
-	public static TextNoteRecordDTO create(TextNoteRecord ar) {
-		TextNoteRecordDTO dto = new TextNoteRecordDTO();
-		dto.activityId = ar.getActivity() != null ? ar.getActivity().getId() : null;
-		dto.startTime = ar.getStartTime();
-		dto.comment = ar.getComment();
-		return dto;
-	}
+    public static TextNoteRecordDTO create(TextNoteRecord ar) {
+        TextNoteRecordDTO dto = baseCreate(ar, new TextNoteRecordDTO());
+        dto.comment = ar.getComment();
+        return dto;
+    }
 }

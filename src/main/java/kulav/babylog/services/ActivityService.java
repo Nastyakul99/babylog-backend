@@ -17,5 +17,10 @@ public class ActivityService {
 	public List<Activity> getByGroupId(long id) {
 		return activityRepository.findByGroup(id);
 	}
+	
+	public Activity getById(long id) {
+        return activityRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Activity not found"));
+	}
 
 }

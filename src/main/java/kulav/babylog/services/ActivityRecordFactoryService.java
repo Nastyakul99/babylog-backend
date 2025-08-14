@@ -2,6 +2,7 @@ package kulav.babylog.services;
 
 import org.springframework.stereotype.Component;
 import kulav.babylog.models.Activity;
+import kulav.babylog.models.TypeActivityRecord;
 import kulav.babylog.models.dto.records.ActivityRecordDTO;
 import kulav.babylog.models.records.ActivityRecord;
 import kulav.babylog.models.records.TextNoteRecord;
@@ -16,37 +17,52 @@ public class ActivityRecordFactoryService {
         switch (activity.getType()) {
             case BASE_RECORD -> {
             	ActivityRecord record = new ActivityRecord();
-                return setupBase(record, activity, request);
+            	ActivityRecordDTO dto = check(request, ActivityRecordDTO.class);
+            	return record.update(dto, activity);
             }
             case TIME_RANGE -> {
                 TimeRangeRecord record = new TimeRangeRecord();
-                check(request, TimeRangeRecordDTO.class);
-                record.setEndTime(((TimeRangeRecordDTO)request).getEndTime());
-                return setupBase(record, activity, request);
+                TimeRangeRecordDTO dto = check(request, TimeRangeRecordDTO.class);
+                return record.update(dto, activity);
             }
             case TEXT_NOTE -> {
                 TextNoteRecord record = new TextNoteRecord();
-                check(request, TextNoteRecordDTO.class);
-                record.setComment(((TextNoteRecordDTO)request).getComment());
-                return setupBase(record, activity, request);
+                TextNoteRecordDTO dto = check(request, TextNoteRecordDTO.class);
+                return record.update(dto, activity);
+            }
+            default -> throw new IllegalArgumentException("Unsupported activity type");
+        }
+    }
+    
+    public ActivityRecordDTO createDTO(TypeActivityRecord arType, ActivityRecord record) {
+        switch (arType) {
+            case BASE_RECORD -> {
+            	ActivityRecord r = check(record, ActivityRecord.class);
+            	ActivityRecordDTO dto = ActivityRecordDTO.create(r);
+            	return dto;
+            }
+            case TIME_RANGE -> {
+            	TimeRangeRecord r = check(record, TimeRangeRecord.class);
+            	TimeRangeRecordDTO dto = TimeRangeRecordDTO.create(r);
+            	return dto;
+            }
+            case TEXT_NOTE -> {
+            	TextNoteRecord r = check(record, TextNoteRecord.class);
+            	TextNoteRecordDTO dto = TextNoteRecordDTO.create(r);
+            	return dto;
             }
             default -> throw new IllegalArgumentException("Unsupported activity type");
         }
     }
     
     //TODO: дописать
-    private <T extends ActivityRecordDTO> void check(ActivityRecordDTO request, Class<T> clazz) {
+    private <T> T check(Object request, Class<T> clazz) {
         if (!clazz.isInstance(request)) {
-            throw new IllegalArgumentException("Expected DTO of type " + clazz.getSimpleName() +
+            throw new IllegalArgumentException("Invalid request type: expected "
+            		+ clazz.getSimpleName() +
                     ", but got " + request.getClass().getSimpleName());
         }
-    }
-
-    private ActivityRecord setupBase(ActivityRecord record,
-    		Activity activity, ActivityRecordDTO request) {
-    	record.setStartTime(request.getStartTime());
-        record.setActivity(activity);
-        return record;
+        return clazz.cast(request);
     }
 }
 
