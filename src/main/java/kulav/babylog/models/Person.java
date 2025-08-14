@@ -14,7 +14,7 @@ import lombok.ToString;
 
 @Entity
 @ToString
-public class Person {
+public class Person implements DBEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

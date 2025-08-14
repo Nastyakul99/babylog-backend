@@ -11,6 +11,8 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import kulav.babylog.models.Activity;
+import kulav.babylog.models.DBEntity;
+import kulav.babylog.models.Updatable;
 import kulav.babylog.models.dto.records.ActivityRecordDTO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,7 +23,7 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "id")
 @ToString
 @Inheritance(strategy = InheritanceType.JOINED)
-public class ActivityRecord {
+public class ActivityRecord implements Updatable<ActivityRecord, ActivityRecordDTO> {
 	
 	@Getter
 	@Setter
@@ -40,8 +42,14 @@ public class ActivityRecord {
 	protected LocalDateTime startTime;
 	
 	public ActivityRecord update(ActivityRecordDTO dto, Activity activity) {
-		this.startTime = dto.getStartTime();
+		update(dto);
 		this.activity = activity;
+		return this;
+	}
+
+	@Override
+	public ActivityRecord update(ActivityRecordDTO dto) {
+		this.startTime = dto.getStartTime();
 		return this;
 	}
 }

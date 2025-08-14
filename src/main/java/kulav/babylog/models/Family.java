@@ -19,7 +19,7 @@ import lombok.ToString;
 @Entity
 @EqualsAndHashCode(of = "id")
 @ToString
-public class Family {
+public class Family implements DBEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

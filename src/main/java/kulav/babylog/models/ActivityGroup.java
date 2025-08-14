@@ -17,7 +17,7 @@ import lombok.ToString;
 @Entity
 @EqualsAndHashCode(of = "id")
 @ToString
-public class ActivityGroup {
+public class ActivityGroup implements DBEntity {
 	
 	@Getter
 	@Setter

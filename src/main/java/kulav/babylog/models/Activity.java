@@ -22,7 +22,7 @@ import lombok.ToString;
 @Entity
 @EqualsAndHashCode(of = "id")
 @ToString
-public class Activity {
+public class Activity implements DBEntity {
 	
 	@Getter
 	@Setter

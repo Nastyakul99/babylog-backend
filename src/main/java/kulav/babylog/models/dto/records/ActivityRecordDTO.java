@@ -37,5 +37,4 @@ public class ActivityRecordDTO implements DTO {
     public static ActivityRecordDTO create(ActivityRecord ar) {
         return baseCreate(ar, new ActivityRecordDTO());
     }
-
 }

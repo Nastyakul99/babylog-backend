@@ -18,7 +18,7 @@ import lombok.ToString;
 @Entity
 @EqualsAndHashCode(of = "id")
 @ToString
-public class Baby {
+public class Baby implements Updatable<Baby, BabyDTO> {
 	
 	@Getter
 	@Id
