@@ -1,8 +1,10 @@
 package kulav.babylog.services;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import kulav.babylog.models.Activity;
+import kulav.babylog.models.Baby;
 import kulav.babylog.models.dto.records.ActivityRecordDTO;
 import kulav.babylog.models.records.ActivityRecord;
 import kulav.babylog.repositories.ActivityRecordRepository;
@@ -10,17 +12,15 @@ import kulav.babylog.repositories.ActivityRecordRepository;
 @Service
 public class ActivityRecordService {
 
-	private final ActivityService activityService;
     private final ActivityRecordFactoryService factory;
     private final ActivityRecordRepository activityRecordRepository;
+    private final BabyService babyService;
 
-    public ActivityRecordService(
-    		ActivityService activityService,
-            ActivityRecordFactoryService factory,
-            ActivityRecordRepository activityRecordRepository) {
-        this.activityService = activityService;
+    public ActivityRecordService(ActivityRecordFactoryService factory,
+            ActivityRecordRepository activityRecordRepository, BabyService babyService) {
         this.factory = factory;
         this.activityRecordRepository = activityRecordRepository;
+		this.babyService = babyService;
     }
     
     public ActivityRecordDTO map(ActivityRecord record) {
@@ -31,16 +31,26 @@ public class ActivityRecordService {
     	return factory.createDTO(activity.getType(), record);
     }
     
-    public ActivityRecord getById(Long id) {
+    public ActivityRecord getById(long id) {
         return activityRecordRepository.findById(id)
         		.orElseThrow(() -> new IllegalArgumentException("ActivityRecord with id " + id + " not found"));
+    }
+    
+    public List<ActivityRecord> getByBabyId(long babyId) {
+    	Baby baby = babyService.getById(babyId);
+    	return baby.getRecords();
+    }
+    
+    public List<ActivityRecord> getByBabyIdAndActivityId(long babyId, long activityId) {
+    	List<ActivityRecord> records = getByBabyId(babyId);
+    	return records.stream()
+    			.filter(r -> r.getActivity().getId() == activityId)
+    			.toList();
     }
 
     @Transactional
     public ActivityRecord create(ActivityRecordDTO request) {
-        Activity activity = activityService.getById(request.getActivityId());
-
-        ActivityRecord record = factory.createRecord(activity, request);
+        ActivityRecord record = factory.createRecord(request);
         return activityRecordRepository.save(record);
     }
     
@@ -49,10 +59,8 @@ public class ActivityRecordService {
         Long id = request.getId();
         
         checkExistsById(id);
-               
-        Activity activity = activityService.getById(request.getActivityId());
 
-        ActivityRecord updatedRecord = factory.createRecord(activity, request);
+        ActivityRecord updatedRecord = factory.createRecord(request);
 
         updatedRecord.setId(id);
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import jakarta.transaction.Transactional;
 import kulav.babylog.models.Activity;
 import kulav.babylog.models.ActivityGroup;
+import kulav.babylog.models.TypeActivityRecord;
 import kulav.babylog.repositories.ActivityGroupRepository;
 import kulav.babylog.repositories.ActivityRepository;
 
@@ -29,13 +30,12 @@ public class StartupRunner implements CommandLineRunner {
     	groups.stream()
     	.forEach(g -> activityGroupRepository.save(g));
     	
-    	List<Activity> activities = List.of(new Activity("Левая", "Левая", groups.get(0).getImg(), groups.get(0)),
-    			new Activity("Правая", "Правая", groups.get(0).getImg(), groups.get(0)),
-    			new Activity("Бутылочка", "Бутылочка", groups.get(0).getImg(), groups.get(0)),
-    			new Activity("Сон", "Сон", groups.get(1).getImg(), groups.get(1)));
+    	List<Activity> activities = List.of(new Activity("Левая", "Левая", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.TIME_RANGE),
+    			new Activity("Правая", "Правая", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.TIME_RANGE),
+    			new Activity("Бутылочка", "Бутылочка", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.BASE_RECORD),
+    			new Activity("Сон", "Сон", groups.get(1).getImg(), groups.get(1), TypeActivityRecord.TIME_RANGE));
     	
     	activities.stream()
     	.forEach(a -> activityRepository.save(a));
-    	
     }
 }

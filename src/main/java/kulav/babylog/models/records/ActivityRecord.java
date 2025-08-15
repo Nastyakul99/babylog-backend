@@ -1,6 +1,7 @@
 package kulav.babylog.models.records;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,17 +12,13 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import kulav.babylog.models.Activity;
-import kulav.babylog.models.DBEntity;
+import kulav.babylog.models.Baby;
 import kulav.babylog.models.Updatable;
 import kulav.babylog.models.dto.records.ActivityRecordDTO;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@EqualsAndHashCode(of = "id")
-@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 public class ActivityRecord implements Updatable<ActivityRecord, ActivityRecordDTO> {
 	
@@ -39,11 +36,18 @@ public class ActivityRecord implements Updatable<ActivityRecord, ActivityRecordD
 	
 	@Getter
 	@Setter
+	@ManyToOne
+	@JoinColumn(name="baby_id")
+	protected Baby baby;
+	
+	@Getter
+	@Setter
 	protected LocalDateTime startTime;
 	
-	public ActivityRecord update(ActivityRecordDTO dto, Activity activity) {
+	public ActivityRecord update(ActivityRecordDTO dto, Activity activity, Baby baby) {
 		update(dto);
 		this.activity = activity;
+		this.baby = baby;
 		return this;
 	}
 
@@ -51,5 +55,27 @@ public class ActivityRecord implements Updatable<ActivityRecord, ActivityRecordD
 	public ActivityRecord update(ActivityRecordDTO dto) {
 		this.startTime = dto.getStartTime();
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "ActivityRecord [id=" + id + ", activity=" + activity + ", startTime=" + startTime + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(activity, startTime);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ActivityRecord other = (ActivityRecord) obj;
+		return Objects.equals(activity, other.activity) && Objects.equals(startTime, other.startTime);
 	}
 }

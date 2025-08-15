@@ -2,6 +2,8 @@ package kulav.babylog.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,14 +16,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import kulav.babylog.models.records.ActivityRecord;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@EqualsAndHashCode(of = "id")
-@ToString
 public class Activity implements DBEntity {
 	
 	@Getter
@@ -62,11 +60,35 @@ public class Activity implements DBEntity {
 		
 	}
 	
-	public Activity(String name, String printName, String img, ActivityGroup group) {
+	public Activity(String name, String printName, String img, ActivityGroup group, TypeActivityRecord type) {
 		this.name = name;
 		this.printName = printName;
 		this.img = img;
 		this.group = group;
+		this.type = type;
 	}
 
+	@Override
+	public String toString() {
+		return "Activity [id=" + id + ", name=" + name + ", printName=" + printName + ", img=" + img + ", type=" + type
+				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(img, name, printName, type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Activity other = (Activity) obj;
+		return Objects.equals(img, other.img) && Objects.equals(name, other.name)
+				&& Objects.equals(printName, other.printName) && type == other.type;
+	}
 }

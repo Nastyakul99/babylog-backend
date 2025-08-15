@@ -2,6 +2,7 @@ package kulav.babylog.services;
 
 import org.springframework.stereotype.Component;
 import kulav.babylog.models.Activity;
+import kulav.babylog.models.Baby;
 import kulav.babylog.models.TypeActivityRecord;
 import kulav.babylog.models.dto.records.ActivityRecordDTO;
 import kulav.babylog.models.records.ActivityRecord;
@@ -12,23 +13,33 @@ import kulav.babylog.models.dto.records.TextNoteRecordDTO;
 
 @Component
 public class ActivityRecordFactoryService {
+	
+	private final ActivityService activityService;
+	private final BabyService babyService;
+	
+	public ActivityRecordFactoryService(ActivityService activityService, BabyService babyService) {
+		this.activityService = activityService;
+		this.babyService = babyService;
+	}
 
-    public ActivityRecord createRecord(Activity activity, ActivityRecordDTO request) {
+    public ActivityRecord createRecord(ActivityRecordDTO request) {
+    	Activity activity = activityService.getById(request.getActivityId());
+    	Baby baby = babyService.getById(request.getBabyId());
         switch (activity.getType()) {
             case BASE_RECORD -> {
             	ActivityRecord record = new ActivityRecord();
             	ActivityRecordDTO dto = check(request, ActivityRecordDTO.class);
-            	return record.update(dto, activity);
+            	return record.update(dto, activity, baby);
             }
             case TIME_RANGE -> {
                 TimeRangeRecord record = new TimeRangeRecord();
                 TimeRangeRecordDTO dto = check(request, TimeRangeRecordDTO.class);
-                return record.update(dto, activity);
+                return record.update(dto, activity, baby);
             }
             case TEXT_NOTE -> {
                 TextNoteRecord record = new TextNoteRecord();
                 TextNoteRecordDTO dto = check(request, TextNoteRecordDTO.class);
-                return record.update(dto, activity);
+                return record.update(dto, activity, baby);
             }
             default -> throw new IllegalArgumentException("Unsupported activity type");
         }
