@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import kulav.babylog.aspects.authentication.Signed;
 import kulav.babylog.models.dto.ActivityRecordSignedRequest;
 import kulav.babylog.models.dto.RecordsByBabyAndActivityRequest;
 import kulav.babylog.models.dto.SubIdRequest;
@@ -26,6 +28,7 @@ public class ActivityRecordController {
         this.activityRecordService = activityRecordService;
     }
 
+    @Signed
     @PostMapping
     public ActivityRecordDTO create(@RequestBody ActivityRecordSignedRequest request) {
         ActivityRecord createdRecord = activityRecordService.create(request.getActivityRecord());
@@ -33,6 +36,7 @@ public class ActivityRecordController {
         return dto;
     }
     
+    @Signed
     @GetMapping("/baby/")
     public List<ActivityRecordDTO> getByBabyId(SubIdRequest request) {
     	return activityRecordService.getByBabyId(request.getSubId())
@@ -41,6 +45,7 @@ public class ActivityRecordController {
     			.toList();
     }
     
+    @Signed
     @GetMapping("/baby/activity")
     public List<ActivityRecordDTO> getByBabyIdAndActivityId(RecordsByBabyAndActivityRequest request) {
     	return activityRecordService.getByBabyIdAndActivityId(request.getBabyId(), request.getActivityId())
@@ -49,12 +54,14 @@ public class ActivityRecordController {
     			.toList();
     }
 
+    @Signed
     @PutMapping
     public ActivityRecordDTO update(@RequestBody ActivityRecordDTO request) {
         ActivityRecord updatedRecord = activityRecordService.update(request);
         return activityRecordService.map(updatedRecord);
     }
 
+    @Signed
     @DeleteMapping()
     public void delete(SubIdRequest request) {
         activityRecordService.delete(request.getSubId());
