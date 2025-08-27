@@ -53,11 +53,20 @@ public class ActivityRecordController {
     			.map(activityRecordService::map)
     			.toList();
     }
+    
+    @Signed
+    @GetMapping("/baby/group")
+    public List<ActivityRecordDTO> getByBabyIdAndGroupId(RecordsByBabyAndActivityRequest request) {
+    	return activityRecordService.getByBabyIdAndGroupId(request.getBabyId(), request.getActivityId())
+    			.stream()
+    			.map(activityRecordService::map)
+    			.toList();
+    }
 
     @Signed
     @PutMapping
-    public ActivityRecordDTO update(@RequestBody ActivityRecordDTO request) {
-        ActivityRecord updatedRecord = activityRecordService.update(request);
+    public ActivityRecordDTO update(@RequestBody ActivityRecordSignedRequest request) {
+        ActivityRecord updatedRecord = activityRecordService.update(request.getActivityRecord());
         return activityRecordService.map(updatedRecord);
     }
 

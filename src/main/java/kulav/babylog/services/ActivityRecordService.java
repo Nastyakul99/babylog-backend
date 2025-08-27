@@ -47,6 +47,13 @@ public class ActivityRecordService {
     			.filter(r -> r.getActivity().getId() == activityId)
     			.toList();
     }
+    
+    public List<ActivityRecord> getByBabyIdAndGroupId(long babyId, long groupId) {
+    	List<ActivityRecord> records = getByBabyId(babyId);
+    	return records.stream()
+    			.filter(r -> r.getActivity().getGroup().getId() == groupId)
+    			.toList();
+    }
 
     @Transactional
     public ActivityRecord create(ActivityRecordDTO request) {
