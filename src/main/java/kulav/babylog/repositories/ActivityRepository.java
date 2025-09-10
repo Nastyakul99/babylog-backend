@@ -11,4 +11,6 @@ public interface ActivityRepository extends CrudRepository<Activity,Long> {
 
 	@Query(value="select a from Activity a where a.group.id=:id")
 	List<Activity> findByGroup(long id);
+	
+	List<Activity> findAll();
 }

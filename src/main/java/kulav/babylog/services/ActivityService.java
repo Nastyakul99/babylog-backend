@@ -14,6 +14,10 @@ public class ActivityService {
 		this.activityRepository = activityRepository;
 	}
 	
+	public List<Activity> get() {
+		return activityRepository.findAll();
+	}
+	
 	public List<Activity> getByGroupId(long id) {
 		return activityRepository.findByGroup(id);
 	}

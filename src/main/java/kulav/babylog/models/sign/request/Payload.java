@@ -2,13 +2,13 @@ package kulav.babylog.models.sign.request;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Function;
 import kulav.babylog.models.dto.DTO;
 import kulav.babylog.utils.ParamQueryGenerator;
+import kulav.babylog.utils.ReflectionUtils;
 
 public interface Payload {
 	
@@ -27,7 +27,7 @@ public interface Payload {
 		if (filterFields.size() == 1) {
 			Field f = filterFields.get(0);
 				Object newO = getField(f, o);
-				Function<Object, List<Field>> func = obj -> Arrays.asList(obj.getClass().getDeclaredFields());
+				Function<Object, List<Field>> func = obj -> Arrays.asList(ReflectionUtils.getAllFields(obj.getClass()));
 				return genParamQuery(newO, func);
 		}
 		
@@ -44,14 +44,14 @@ public interface Payload {
 	}
 	
 	default List<Field> filterPartOfPayloadDtos(Object o) {
-		Field[] fields = o.getClass().getDeclaredFields();
+		Field[] fields = ReflectionUtils.getAllFields(o.getClass());
 		return Arrays.stream(fields)
 		.filter(f ->  f.isAnnotationPresent(PartOfPayload.class) && getField(f, o) instanceof DTO)
 		.toList();
 	}
 	
 	default List<Field> filterPartOfPayload(Object o) {
-		Field[] fields = o.getClass().getDeclaredFields();
+		Field[] fields = ReflectionUtils.getAllFields(o.getClass());
 		return Arrays.stream(fields)
 		.filter(f ->  f.isAnnotationPresent(PartOfPayload.class))
 		.toList();

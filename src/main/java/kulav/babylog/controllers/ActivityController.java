@@ -19,11 +19,24 @@ public class ActivityController {
 		this.activityService = activityService;
 	}
 	
+	@GetMapping()
+	public List<ActivityDTO> get() {
+		return activityService.get()
+				.stream()
+				.map(ActivityDTO::create)
+				.toList();
+	}
+	
 	@GetMapping("/group/{id}")
 	public List<ActivityDTO> getByGroupId(@PathVariable long id) {
 		return activityService.getByGroupId(id)
 				.stream()
 				.map(ActivityDTO::create)
 				.toList();
+	}
+	
+	@GetMapping("/{id}")
+	public ActivityDTO getById(@PathVariable long id) {
+		return ActivityDTO.create(activityService.getById(id)); 
 	}
 }

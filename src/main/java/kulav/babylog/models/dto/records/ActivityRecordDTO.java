@@ -12,7 +12,8 @@ import lombok.Data;
 @JsonTypeInfo(
 	    use = JsonTypeInfo.Id.NAME,
 	    include = JsonTypeInfo.As.PROPERTY,
-	    property = "type"
+	    property = "type",
+	    visible = true
 	)
 	@JsonSubTypes({
 		@JsonSubTypes.Type(value = ActivityRecordDTO.class, name = "BASE_RECORD"),

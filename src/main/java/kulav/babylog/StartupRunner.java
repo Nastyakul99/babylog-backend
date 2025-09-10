@@ -32,8 +32,13 @@ public class StartupRunner implements CommandLineRunner {
     	
     	List<Activity> activities = List.of(new Activity("Левая", "Левая", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.TIME_RANGE),
     			new Activity("Правая", "Правая", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.TIME_RANGE),
-    			new Activity("Бутылочка", "Бутылочка", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.BASE_RECORD),
-    			new Activity("Сон", "Сон", groups.get(1).getImg(), groups.get(1), TypeActivityRecord.TIME_RANGE));
+    			new Activity("Бутылочка смесь", "Бутылочка смесь", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.BASE_RECORD),
+    			new Activity("Бутылочка молоко", "Бутылочка молоко", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.BASE_RECORD),
+    			new Activity("Еда", "Еда", groups.get(0).getImg(), groups.get(0), TypeActivityRecord.TEXT_NOTE),
+    			new Activity("Мокрый", "Мокрый", groups.get(2).getImg(), groups.get(0), TypeActivityRecord.BASE_RECORD),
+    			new Activity("Грязный", "Грязный", groups.get(2).getImg(), groups.get(0), TypeActivityRecord.BASE_RECORD),
+    			new Activity("Сон дневной", "Сон дневной", groups.get(1).getImg(), groups.get(1), TypeActivityRecord.TIME_RANGE),
+    			new Activity("Сон ночной", "Сон ночной", groups.get(1).getImg(), groups.get(1), TypeActivityRecord.TIME_RANGE));
     	
     	activities.stream()
     	.forEach(a -> activityRepository.save(a));

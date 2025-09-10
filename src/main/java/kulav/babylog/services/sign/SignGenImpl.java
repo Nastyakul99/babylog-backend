@@ -46,6 +46,7 @@ public class SignGenImpl implements SignGen {
 
 	@Override
 	public String generate(Data data) {
+		System.out.println("RequestId=" + data.getRequestId());
 		String paramsQuery = genParamsQuery(data);
 		// Значение защищённого ключа из настроек приложения
 		String secretKey = env.getProperty("SECRET_KEY");
