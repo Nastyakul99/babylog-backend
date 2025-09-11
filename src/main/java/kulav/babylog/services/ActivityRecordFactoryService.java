@@ -5,7 +5,9 @@ import kulav.babylog.models.Activity;
 import kulav.babylog.models.Baby;
 import kulav.babylog.models.TypeActivityRecord;
 import kulav.babylog.models.dto.records.ActivityRecordDTO;
+import kulav.babylog.models.dto.records.IntegerAndTimeRangeDTO;
 import kulav.babylog.models.records.ActivityRecord;
+import kulav.babylog.models.records.IntegerAndTimeRange;
 import kulav.babylog.models.records.TextNoteRecord;
 import kulav.babylog.models.records.TimeRangeRecord;
 import kulav.babylog.models.dto.records.TimeRangeRecordDTO;
@@ -41,6 +43,16 @@ public class ActivityRecordFactoryService {
                 TextNoteRecordDTO dto = check(request, TextNoteRecordDTO.class);
                 return record.update(dto, activity, baby);
             }
+            case COUNT_RECORD -> {
+                IntegerAndTimeRange record = new IntegerAndTimeRange();
+                IntegerAndTimeRangeDTO dto = check(request, IntegerAndTimeRangeDTO.class);
+                return record.update(dto, activity, baby);
+            }
+            case ML_RECORD -> {
+                IntegerAndTimeRange record = new IntegerAndTimeRange();
+                IntegerAndTimeRangeDTO dto = check(request, IntegerAndTimeRangeDTO.class);
+                return record.update(dto, activity, baby);
+            }
             default -> throw new IllegalArgumentException("Unsupported activity type");
         }
     }
@@ -60,6 +72,16 @@ public class ActivityRecordFactoryService {
             case TEXT_NOTE -> {
             	TextNoteRecord r = check(record, TextNoteRecord.class);
             	TextNoteRecordDTO dto = TextNoteRecordDTO.create(r);
+            	return dto;
+            }
+            case COUNT_RECORD -> {
+            	IntegerAndTimeRange r = check(record, IntegerAndTimeRange.class);
+            	IntegerAndTimeRangeDTO dto = IntegerAndTimeRangeDTO.create(r);
+            	return dto;
+            }
+            case ML_RECORD -> {
+            	IntegerAndTimeRange r = check(record, IntegerAndTimeRange.class);
+            	IntegerAndTimeRangeDTO dto = IntegerAndTimeRangeDTO.create(r);
             	return dto;
             }
             default -> throw new IllegalArgumentException("Unsupported activity type");
