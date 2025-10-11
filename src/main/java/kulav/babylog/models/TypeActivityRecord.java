@@ -7,8 +7,8 @@ public enum TypeActivityRecord {
 	TIME_RANGE,
 	
 	TEXT_NOTE,
-	//кол-во раз, IntegerAndTimeRange
+	//кол-во раз
 	COUNT_RECORD,
-	//мл, IntegerAndTimeRange
+	//мл
 	ML_RECORD;
 }

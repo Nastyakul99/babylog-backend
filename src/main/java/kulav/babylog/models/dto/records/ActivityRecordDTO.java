@@ -1,8 +1,6 @@
 package kulav.babylog.models.dto.records;
 
-import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.OffsetDateTime;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import kulav.babylog.models.dto.DTO;
@@ -18,7 +16,9 @@ import lombok.Data;
 	@JsonSubTypes({
 		@JsonSubTypes.Type(value = ActivityRecordDTO.class, name = "BASE_RECORD"),
 	    @JsonSubTypes.Type(value = TextNoteRecordDTO.class, name = "TEXT_NOTE"),
-	    @JsonSubTypes.Type(value = TimeRangeRecordDTO.class, name = "TIME_RANGE")
+	    @JsonSubTypes.Type(value = TimeRangeRecordDTO.class, name = "TIME_RANGE"),
+	    @JsonSubTypes.Type(value = IntegerAndTimeRangeDTO.class, name = "COUNT_RECORD"),
+	    @JsonSubTypes.Type(value = MLAndTimeRangeDTO.class, name = "ML_RECORD")
 	})
 @Data
 public class ActivityRecordDTO implements DTO {
@@ -26,8 +26,8 @@ public class ActivityRecordDTO implements DTO {
 	protected long id;
 	protected long babyId;
 	protected long activityId;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	protected LocalDateTime startTime;
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+	protected OffsetDateTime  startTime;
 	
     protected static <T extends ActivityRecordDTO> T baseCreate(ActivityRecord ar, T dto) {
     	dto.babyId = ar.getBaby() != null ? ar.getBaby().getId() : null;

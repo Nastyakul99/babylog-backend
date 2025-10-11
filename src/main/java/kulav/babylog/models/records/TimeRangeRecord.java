@@ -1,6 +1,7 @@
 package kulav.babylog.models.records;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 import jakarta.persistence.Entity;
 import kulav.babylog.models.Activity;
 import kulav.babylog.models.Baby;
@@ -13,7 +14,7 @@ public class TimeRangeRecord extends ActivityRecord {
 
 	@Getter
 	@Setter
-	private LocalDateTime endTime;
+	protected OffsetDateTime  endTime;
 	
 	public TimeRangeRecord update(TimeRangeRecordDTO dto, Activity activity, Baby baby) {
 		this.startTime = dto.getStartTime();

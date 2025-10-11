@@ -1,6 +1,6 @@
 package kulav.babylog.models.records;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -42,7 +42,7 @@ public class ActivityRecord implements Updatable<ActivityRecord, ActivityRecordD
 	
 	@Getter
 	@Setter
-	protected LocalDateTime startTime;
+	protected OffsetDateTime  startTime;
 	
 	public ActivityRecord update(ActivityRecordDTO dto, Activity activity, Baby baby) {
 		update(dto);

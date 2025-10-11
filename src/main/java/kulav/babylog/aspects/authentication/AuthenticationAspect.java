@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
-
 import kulav.babylog.exceptions.AuthenticationException;
 import kulav.babylog.models.sign.request.SignedRequest;
 import kulav.babylog.services.sign.SignGenImpl;
@@ -19,9 +18,11 @@ import kulav.babylog.services.sign.SignGenImpl;
 @Aspect
 public class AuthenticationAspect {
 	
-	
 	@Value("${kulav.appid}")
 	private String appId;
+	
+	@Value("${kulav.authentication:true}")
+	private Boolean isAuthentication;
 	
 	@Autowired
 	private SignGenImpl signGenImpl;
@@ -31,6 +32,8 @@ public class AuthenticationAspect {
 
     @Before("@annotation(kulav.babylog.aspects.authentication.Signed)")
     public void check(JoinPoint joinPoint) {
+    	if (!isAuthentication) return;
+    	
         Object[] args = joinPoint.getArgs(); // Получаем массив аргументов
         List<Object> requests = Stream.of(args)
         .filter(this::isSignedRequest)

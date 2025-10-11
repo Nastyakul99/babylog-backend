@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import kulav.babylog.aspects.authentication.Signed;
 import kulav.babylog.models.dto.ActivityRecordSignedRequest;
 import kulav.babylog.models.dto.RecordsByBabyAndActivityRequest;
@@ -34,6 +33,12 @@ public class ActivityRecordController {
         ActivityRecord createdRecord = activityRecordService.create(request.getActivityRecord());
         ActivityRecordDTO dto = activityRecordService.map(createdRecord);
         return dto;
+    }
+    
+    @Signed
+    @GetMapping
+    public ActivityRecordDTO getById(SubIdRequest request) {
+    	return activityRecordService.map(activityRecordService.getById(request.getSubId()));
     }
     
     @Signed
@@ -72,7 +77,7 @@ public class ActivityRecordController {
 
     @Signed
     @DeleteMapping()
-    public void delete(SubIdRequest request) {
+    public void delete(@RequestBody SubIdRequest request) {
         activityRecordService.delete(request.getSubId());
     }
 }

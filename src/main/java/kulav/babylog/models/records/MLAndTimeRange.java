@@ -3,18 +3,12 @@ package kulav.babylog.models.records;
 import jakarta.persistence.Entity;
 import kulav.babylog.models.Activity;
 import kulav.babylog.models.Baby;
-import kulav.babylog.models.dto.records.IntegerAndTimeRangeDTO;
-import lombok.Getter;
-import lombok.Setter;
+import kulav.babylog.models.dto.records.MLAndTimeRangeDTO;
 
 @Entity
-public class IntegerAndTimeRange extends TimeRangeRecord {
+public class MLAndTimeRange extends IntegerAndTimeRange {
 
-	@Getter
-	@Setter
-	protected Integer val;
-	
-	public IntegerAndTimeRange update(IntegerAndTimeRangeDTO dto, Activity activity, Baby baby) {
+	public MLAndTimeRange update(MLAndTimeRangeDTO dto, Activity activity, Baby baby) {
 		this.startTime = dto.getStartTime();
 		this.endTime = dto.getEndTime();
 		this.activity = activity;

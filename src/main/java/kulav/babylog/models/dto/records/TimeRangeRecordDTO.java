@@ -1,7 +1,6 @@
 package kulav.babylog.models.dto.records;
 
-import java.time.LocalDateTime;
-
+import java.time.OffsetDateTime;
 import kulav.babylog.models.records.TimeRangeRecord;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,8 +8,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class TimeRangeRecordDTO extends ActivityRecordDTO {
-
-	private LocalDateTime endTime;
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+	private OffsetDateTime endTime;
 	
     public static TimeRangeRecordDTO create(TimeRangeRecord ar) {
         TimeRangeRecordDTO dto = baseCreate(ar, new TimeRangeRecordDTO());

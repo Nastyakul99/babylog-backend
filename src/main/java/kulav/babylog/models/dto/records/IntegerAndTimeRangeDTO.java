@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class IntegerAndTimeRangeDTO extends TimeRangeRecordDTO {
 
-	private Integer val;
+	protected Integer val;
 	
     public static IntegerAndTimeRangeDTO create(IntegerAndTimeRange ar) {
     	IntegerAndTimeRangeDTO dto = baseCreate(ar, new IntegerAndTimeRangeDTO());
