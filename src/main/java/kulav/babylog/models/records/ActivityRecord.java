@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import kulav.babylog.models.Activity;
 import kulav.babylog.models.Baby;
+import kulav.babylog.models.Person;
 import kulav.babylog.models.Updatable;
 import kulav.babylog.models.dto.records.ActivityRecordDTO;
 import lombok.Getter;
@@ -44,10 +45,17 @@ public class ActivityRecord implements Updatable<ActivityRecord, ActivityRecordD
 	@Setter
 	protected OffsetDateTime  startTime;
 	
-	public ActivityRecord update(ActivityRecordDTO dto, Activity activity, Baby baby) {
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name="author_id")
+	protected Person author;
+	
+	public ActivityRecord update(ActivityRecordDTO dto, Activity activity, Baby baby, Person author) {
 		update(dto);
 		this.activity = activity;
 		this.baby = baby;
+		this.author = author;
 		return this;
 	}
 
