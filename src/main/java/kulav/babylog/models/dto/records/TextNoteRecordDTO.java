@@ -6,13 +6,14 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class TextNoteRecordDTO extends ActivityRecordDTO {
+public class TextNoteRecordDTO extends TimeRangeRecordDTO {
 
 	private String comment;
 	
     public static TextNoteRecordDTO create(TextNoteRecord ar) {
         TextNoteRecordDTO dto = baseCreate(ar, new TextNoteRecordDTO());
         dto.comment = ar.getComment();
+        dto.endTime = ar.getEndTime();
         return dto;
     }
 }

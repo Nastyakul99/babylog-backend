@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-public class TextNoteRecord extends ActivityRecord {
+public class TextNoteRecord extends TimeRangeRecord {
 
 	@Getter
 	@Setter
@@ -16,6 +16,7 @@ public class TextNoteRecord extends ActivityRecord {
 	
 	public TextNoteRecord update(TextNoteRecordDTO dto, Activity activity, Baby baby) {
 		this.startTime = dto.getStartTime();
+		this.endTime = dto.getEndTime();
 		this.activity = activity;
 		this.comment = dto.getComment();
 		this.baby = baby;

@@ -11,6 +11,7 @@ public class MLAndTimeRangeDTO extends IntegerAndTimeRangeDTO {
     public static MLAndTimeRangeDTO create(MLAndTimeRange ar) {
     	MLAndTimeRangeDTO dto = baseCreate(ar, new MLAndTimeRangeDTO());
         dto.val = ar.getVal();
+        dto.endTime = ar.getEndTime();
         return dto;
     }
 }

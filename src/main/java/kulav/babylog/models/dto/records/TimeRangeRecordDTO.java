@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class TimeRangeRecordDTO extends ActivityRecordDTO {
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
-	private OffsetDateTime endTime;
+	protected OffsetDateTime endTime;
 	
     public static TimeRangeRecordDTO create(TimeRangeRecord ar) {
         TimeRangeRecordDTO dto = baseCreate(ar, new TimeRangeRecordDTO());

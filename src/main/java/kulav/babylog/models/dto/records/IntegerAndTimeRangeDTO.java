@@ -13,6 +13,7 @@ public class IntegerAndTimeRangeDTO extends TimeRangeRecordDTO {
     public static IntegerAndTimeRangeDTO create(IntegerAndTimeRange ar) {
     	IntegerAndTimeRangeDTO dto = baseCreate(ar, new IntegerAndTimeRangeDTO());
         dto.val = ar.getVal();
+        dto.endTime = ar.getEndTime();
         return dto;
     }
 }
